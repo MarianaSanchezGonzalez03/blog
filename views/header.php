@@ -14,7 +14,7 @@
             <header>
             <div class="contenedor">
             <div class="logo izquierda">
-            <p><a href="a"/> Mi Primer Blog </a></p>
+            <p><a href="<?php echo RUTA;?>"/> Mi Primer Blog </a></p>
             </div>
             <div class="derecha">
             <form name ="busqueda" class="buscar"action="<?php echo RUTA; ?>/buscar.php" method= "get">
@@ -31,4 +31,3 @@
             </div>
             </div>
             </header>
-            
