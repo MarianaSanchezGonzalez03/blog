@@ -1,4 +1,4 @@
-<<?php require'header.php' ?>
+<?php require'header.php' ?>
 
 <div class="contenedor">
     <h2><?php echo $titulo ?></h2>

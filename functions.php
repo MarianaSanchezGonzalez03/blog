@@ -1,5 +1,5 @@
 <?php
-//hace la conexion a la base de datos
+//Hace la coneccion a la BD
 function conexion($bd_config){
 
     try {
@@ -9,27 +9,18 @@ function conexion($bd_config){
         return false;
     }
 }
-
-//Limpia los datos
+//Limpia los datos para que el admin pueda crear articulos de buena forma
 function limpiarDatos($datos){
-$datos= trim($datos);
-$datos = stripcslashes($datos);
-$datos = htmlspecialchars($datos);
-return $datos;
-
+    $datos = trim($datos);
+    $datos = stripslashes($datos);
+    $datos = htmlspecialchars($datos);
+    return $datos;
 }
-//cuengta en el numero de pagunas en el que se encuentra
+//Cuenta el numero de pagina en el que estas
 function pagina_actual(){
-    return isset($_GET['p']) ? (int)$_GET['p']: 1 ;
+    return isset($_GET['p']) ? (int)$_GET['p'] : 1;
 }
-//Obtiene los posts, conectando a la BD y trayendo el num de pagina
-function obtener_post($post_por_pagina, $conexion){
-    $inicio = (pagina_actual() > 1) ? pagina_actual() * $post_por_pagina - $post_por_pagina : 0;
-    $sentencia = $conexion->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM articulos LIMIT $inicio, $post_por_pagina");
-    $sentencia->execute();
-    return $sentencia->fetchAll();
-}
-//seleccionar el numero de paginas con post
+//selecciona el numero de paginas con post
 function numero_paginas($post_por_pagina, $conexion){
     $total_post = $conexion->prepare('SELECT FOUND_ROWS() as total');
     $total_post->execute();
@@ -39,18 +30,24 @@ function numero_paginas($post_por_pagina, $conexion){
     return $numero_paginas;
 
 }
-
-//Funcion que da el id del articulo y limpia sus datos para traerlo desde la BD
+//Obtiene los posts, conectando a la BD y trayendo el num de pagina
+function obtener_post($post_por_pagina, $conexion){
+    $inicio = (pagina_actual() > 1) ? pagina_actual() * $post_por_pagina - $post_por_pagina : 0;
+    $sentencia = $conexion->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM articulos LIMIT $inicio, $post_por_pagina");
+    $sentencia->execute();
+    return $sentencia->fetchAll();
+}
+//funcion que da el id del articulo, limpia sus datos para traerlo desde la BD
 function id_articulo($id){
     return (int)limpiarDatos($id);
 }
-//Obtener los post por medio del id
+//Obtiene los post por medio del id
 function obtener_post_por_id($conexion, $id){
     $resultado = $conexion->query("SELECT * FROM articulos WHERE id= $id LIMIT 1");
     $resultado = $resultado->fetchAll();
     return ($resultado) ? $resultado : false;
 }
-//Modificar la fecha de los post
+//modificar la fecha de los post
 function fecha($fecha){
     $timestamp = strtotime($fecha);
     $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -61,8 +58,7 @@ function fecha($fecha){
 
     $fecha = "$dia de $meses[$mes] del $year";
     return $fecha;
-}   
-
+}
 //Comprobar la sesion de admin
 function comprobarSession(){
 
@@ -70,4 +66,5 @@ function comprobarSession(){
         header('Location: ' . RUTA);
     }
 }
+
 ?>
