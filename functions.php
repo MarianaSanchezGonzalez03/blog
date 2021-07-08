@@ -29,4 +29,27 @@ function obtener_post($post_por_pagina, $conexion){
     $sentencia->execute();
     return $sentencia->fetchAll();
 }
+
+//Funcion que da el id del articulo y limpia sus datos para traerlo desde la BD
+function id_articulo($id){
+    return (int)limpiarDatos($id);
+}
+//Obtener los post por medio del id
+function obtener_post_por_id($conexion, $id){
+    $resultado = $conexion->query("SELECT * FROM articulos WHERE id= $id LIMIT 1");
+    $resultado = $resultado->fetchAll();
+    return ($resultado) ? $resultado : false;
+}
+//Modificar la fecha de los post
+function fecha($fecha){
+    $timestamp = strtotime($fecha);
+    $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+    $dia = date('d', $timestamp);
+    $mes = date('m', $timestamp)-1;
+    $year = date('Y', $timestamp);
+
+    $fecha = "$dia de $meses[$mes] del $year";
+    return $fecha;
+}
 ?>
