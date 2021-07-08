@@ -10,7 +10,7 @@ $blog_config= array(
     'carpeta_imagenes'=>'imagenes/'
     
 );
-$blog_admin=array(
+$blog_admin= array(
     'usuario'=>'Carlos',
     'password'=>'123'
 );

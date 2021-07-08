@@ -1,38 +1,22 @@
-<?php require 'header.php'; ?>
-                
-
-
-                <div class="contenedor">
-                <div class="post">
-                <article>
-                <h2 class="titulo"><a href="#">Titulo del articulo</a></h2>
-                <p class="fecha">5 de Julio de 2021</p>
-                <div class="thumb">
-                <a href="#">
-                <img src="<?php echo RUTA; ?>/imagenes/1.png.jpeg" alt="">
+<?php require'header.php' ?>
+<div class="contenedor">
+    <?php foreach($posts as $post): ?>
+    <div class="post">
+        <article>
+            <h2 class="titulo"><a href="single.php?id=<?php echo $post['id'] ?>"><?php echo $post['titulo'] ?></a></h2>
+            <p class="fecha"><?php echo $post['fecha'] ?></p>
+            <div class="thumb">
+                <a href="single.php?id=<?php echo $post['id'] ?>">
+                    <img src="<?php echo RUTA; ?>/imagenes/<?php echo $post['thumb'] ?>" alt="">
                 </a>
-               
-                </div>
-                 <p class="extracto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, quael</p>
-                 <a href="#" class="continuar">Continuar leyendo</a>
-                </article>
-                </div>
-                </div>
-                <div class="contenedor">
-                <div class="post">
-                <article>
-                <h2 class="titulo"><a href="#">Titulo del articulo</a></h2>
-                <p class="fecha">5 de Julio de 2021</p>
-                <div class="thumb">
-                <a href="#">
-                <img src="<?php echo RUTA; ?>/imagenes/1.png.jpeg" alt="">
-                </a>
-               
-                </div>
-                 <p class="extracto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, quael</p>
-                 <a href="#" class="continuar">Continuar leyendo</a>
-                </article>
-                </div>
-                <?php require 'paginacion.php';?>
-                </div>
-                <?php require 'footer.php'; ?>           
+            </div>
+            <p class="extracto"><?php echo $post['extracto'] ?></p>
+            <a href="single.php?id=<?php echo $post['id'] ?>" class="continuar">Continuar leyendo</a>
+        </article>
+    </div>
+    <?php endforeach; ?>
+
+    <?php require 'paginacion.php' ?>
+</div>
+
+<?php require'footer.php' ?>       

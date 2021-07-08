@@ -9,7 +9,7 @@
                 <p class="fecha">5 de Julio de 2021</p>
                 <div class="thumb">
                 <a href="#">
-                <img src="<?php echo RUTA; ?>/imagenes/1.png.jpeg" alt="">
+                <img src="<?php echo RUTA; ?>/imagenes/1.jpeg" alt="">
                 </a>
 
                  </div>
@@ -19,6 +19,7 @@
                  <a href="#" class="continuar">Continuar leyendo</a>
                 </article>
                 </div>
+            
                 <?php require 'paginacion.php';?>
                 </div>
                 <?php require 'footer.php'; ?>    
